@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MPG-fragments</string>
+    <string name="gas_mileage">Enter your Gas Mileage</string>
+    <string name="price_of_gas">Enter the price of gas per gallon</string>
+    <string name="trip_length">Enter the length of your trip</string>
+    <string name="eco_mode">ECO Mode</string>
 </resources>
