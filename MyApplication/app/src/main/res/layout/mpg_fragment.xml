@@ -7,18 +7,21 @@
     android:padding="15dp">
 
     <EditText
+        android:id="@+id/gas_mileage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/gas_mileage"
         android:gravity="center"
         android:inputType="numberDecimal"/>
     <EditText
+        android:id="@+id/gas_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/price_of_gas"
         android:gravity="center"
         android:inputType="numberDecimal"/>
     <EditText
+        android:id="@+id/trip_length"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/trip_length"
