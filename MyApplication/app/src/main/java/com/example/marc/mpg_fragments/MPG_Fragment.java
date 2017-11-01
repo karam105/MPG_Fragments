@@ -51,9 +51,6 @@ public class MPG_Fragment extends Fragment {
             Log.d("LOGTAG", "gas" + gas_mileage.getText());
             Log.d("LOGTAG", "price" + price_of_gas.getText());
             Log.d("LOGTAG", "trip" + length_of_trip.getText());
-            bundle.putDouble("gas_mileage", 0.0);
-            bundle.putDouble("gas_price", 0.0);
-            bundle.putDouble("trip", 0.0);
         }
         else
         {

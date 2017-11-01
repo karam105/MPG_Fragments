@@ -62,7 +62,6 @@ public class Results_Fragment extends Fragment
 
         costFormat = String.format("%.2f", no_eco_mile_cost);
         totalFormat = String.format("%.2f", no_eco_total_cost);
-
         mile_cost.setText("Cost per Mile: $" + costFormat);
         total.setText("Total Cost: $" + totalFormat);
         //without eco on ends here
@@ -70,11 +69,15 @@ public class Results_Fragment extends Fragment
         //with eco on starts here
         eco_mile_cost = gas_price / (gas_mileage + 5);
         eco_total_cost = eco_mile_cost * trip_length;
-
         eco_mile_cost_Format = String.format("%.2f", eco_mile_cost);;
         eco_total_cost_Format = String.format("%.2f", eco_total_cost);
         //with eco on ends here
 
+        if (gas_mileage == 0 || gas_price == 0 || trip_length == 0)
+        {
+            mile_cost.setText("Cost per Mile: $0.00");
+            total.setText("Total Cost: $0.00");
+        }
 
         this.ecoMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -82,13 +85,29 @@ public class Results_Fragment extends Fragment
             {
                 if(isChecked) //means that ECO IS ON
                 {
-                    mile_cost.setText("Cost per Mile: $" + eco_mile_cost_Format);
-                    total.setText("Total Cost: $" + eco_total_cost_Format);
+                    if (gas_mileage == 0 || gas_price == 0 || trip_length == 0)
+                    {
+                        mile_cost.setText("Cost per Mile: $0.00");
+                        total.setText("Total Cost: $0.00");
+                    }
+                    else
+                    {
+                        mile_cost.setText("Cost per Mile: $" + eco_mile_cost_Format);
+                        total.setText("Total Cost: $" + eco_total_cost_Format);
+                    }
                 }
                 else //means that ECO IS OFF
                 {
-                    mile_cost.setText("Cost per Mile: $" + costFormat);
-                    total.setText("Total Cost: $" + totalFormat);
+                    if (gas_mileage == 0 || gas_price == 0 || trip_length == 0)
+                    {
+                        mile_cost.setText("Cost per Mile: $0.00");
+                        total.setText("Total Cost: $0.00");
+                    }
+                    else
+                    {
+                        mile_cost.setText("Cost per Mile: $" + costFormat);
+                        total.setText("Total Cost: $" + totalFormat);
+                    }
                 }
             }
         });
