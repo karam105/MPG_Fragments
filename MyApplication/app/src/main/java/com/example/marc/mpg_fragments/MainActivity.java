@@ -1,11 +1,6 @@
 package com.example.marc.mpg_fragments;
 
-import android.content.Intent;
-import android.renderscript.Double2;
-import android.support.transition.Fade;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,10 +63,6 @@ public class MainActivity extends AppCompatActivity
         if(count == 1)
         {
             Bundle getData = mpg_fragment.getInfo();
-            if(getData == null)
-            {
-                Log.d("LOGTAG", "EMPTY");
-            }
             results_fragment.setArguments(getData);
             showFragment(results_fragment);
         }

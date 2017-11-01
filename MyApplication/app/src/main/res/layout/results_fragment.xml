@@ -4,22 +4,25 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:padding="25dp">
+    android:padding="25dp"
+    android:gravity="center|top">
 
     <TextView
         android:id="@+id/TV_mile_cost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
-        android:text="COST_PER_MILE"
+        android:textSize="37sp"
+        android:textColor="@android:color/black"
+        tools:text="Cost per Mile: $0.10"
         android:paddingBottom="20dp"/>
 
     <TextView
         android:id="@+id/TV_total"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
-        android:text="TOTAL_COST"/>
+        android:textSize="37sp"
+        android:textColor="@android:color/black"
+        tools:text="Total Cost: $100.99"/>
     
     <CheckBox
         android:id="@+id/CB_eco"

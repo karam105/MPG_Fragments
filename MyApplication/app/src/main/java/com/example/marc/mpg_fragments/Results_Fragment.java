@@ -1,20 +1,14 @@
 package com.example.marc.mpg_fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-
-import com.example.marc.mpg_fragments.R;
-import com.example.marc.mpg_fragments.MPG_Fragment;
-import com.example.marc.mpg_fragments.mpg_model;
 
 /**
  * Created by Marc on 10/28/2017.
@@ -25,13 +19,22 @@ public class Results_Fragment extends Fragment
     public TextView mile_cost;
     public TextView total;
     public CheckBox ecoMode;
-    double cost_per_mile;
-    double total_cost;
+
+    double no_eco_mile_cost;
+    double no_eco_total_cost;
+
+    double eco_mile_cost;
+    double eco_total_cost;
+
     double gas_mileage;
     double gas_price;
     double trip_length;
 
-    private mpg_model MPG;
+    String costFormat;
+    String totalFormat;
+
+    String eco_mile_cost_Format;
+    String eco_total_cost_Format;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
@@ -53,45 +56,43 @@ public class Results_Fragment extends Fragment
         gas_price = getArguments().getDouble("gas_price");
         trip_length = getArguments().getDouble("trip");
 
-        cost_per_mile = gas_price / (gas_mileage + 0);
-        total_cost = cost_per_mile * trip_length;
+        //without eco on starts here
+        no_eco_mile_cost = gas_price / (gas_mileage + 0);
+        no_eco_total_cost = no_eco_mile_cost * trip_length;
+
+        costFormat = String.format("%.2f", no_eco_mile_cost);
+        totalFormat = String.format("%.2f", no_eco_total_cost);
+
+        mile_cost.setText("Cost per Mile: $" + costFormat);
+        total.setText("Total Cost: $" + totalFormat);
+        //without eco on ends here
+
+        //with eco on starts here
+        eco_mile_cost = gas_price / (gas_mileage + 5);
+        eco_total_cost = eco_mile_cost * trip_length;
+
+        eco_mile_cost_Format = String.format("%.2f", eco_mile_cost);;
+        eco_total_cost_Format = String.format("%.2f", eco_total_cost);
+        //with eco on ends here
+
 
         this.ecoMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked)
             {
-                String ecoCostFormat = String.format("%.2f", cost_per_mile);
-                String ecoTotalFormat = String.format("%.2f", total_cost);
-
-                if(isChecked)
+                if(isChecked) //means that ECO IS ON
                 {
-                    cost_per_mile = gas_price / (gas_mileage + 0);
-                    total_cost = cost_per_mile * trip_length;
-                    mile_cost.setText("Cost per Mile: $" + ecoCostFormat);
-                    total.setText("Total Cost: $" + ecoTotalFormat);
+                    mile_cost.setText("Cost per Mile: $" + eco_mile_cost_Format);
+                    total.setText("Total Cost: $" + eco_total_cost_Format);
                 }
-                else
+                else //means that ECO IS OFF
                 {
-                    cost_per_mile = gas_price / (gas_mileage + 5);
-                    total_cost = cost_per_mile * trip_length;
-                    mile_cost.setText("Cost per Mile: $" + ecoCostFormat);
-                    total.setText("Total Cost: $" + ecoTotalFormat);
+                    mile_cost.setText("Cost per Mile: $" + costFormat);
+                    total.setText("Total Cost: $" + totalFormat);
                 }
             }
         });
 
-        String costFormat = String.format("%.2f", cost_per_mile);
-        String totalFormat = String.format("%.2f", total_cost);
-
-        mile_cost.setText("Cost per Mile: $" + costFormat);
-        total.setText("Total Cost: $" + totalFormat);
-
         return v;
-    }
-
-    public void Calculate(int extraMileage)
-    {
-//        cost_per_mile = gas_price / (gas_mileage + extraMileage);
-//        total_cost = cost_per_mile * trip_length;
     }
 }

@@ -1,11 +1,8 @@
 package com.example.marc.mpg_fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Double2;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.provider.DocumentFile;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.marc.mpg_fragments.R;
-import com.example.marc.mpg_fragments.mpg_model;
 
 /**
  * Created by Marc on 10/28/2017.
@@ -44,10 +40,27 @@ public class MPG_Fragment extends Fragment {
     public Bundle getInfo()
     {
         Bundle bundle = new Bundle();
-        bundle.putDouble("gas_mileage", Double.parseDouble(gas_mileage.getText().toString()));
-        bundle.putDouble("gas_price", Double.parseDouble(price_of_gas.getText().toString()));
-        bundle.putDouble("trip", Double.parseDouble(length_of_trip.getText().toString()));
 
+        if(gas_mileage.getText().toString().equals("") || price_of_gas.getText().toString().equals("") || length_of_trip.getText().toString().equals(""))
+        {
+            Log.d("LOGTAG", "FAIL");
+
+        }
+        else if (gas_mileage.getText().toString().equals("0") || price_of_gas.getText().toString().equals("0") || length_of_trip.getText().toString().equals("0"))
+        {
+            Log.d("LOGTAG", "gas" + gas_mileage.getText());
+            Log.d("LOGTAG", "price" + price_of_gas.getText());
+            Log.d("LOGTAG", "trip" + length_of_trip.getText());
+            bundle.putDouble("gas_mileage", 0.0);
+            bundle.putDouble("gas_price", 0.0);
+            bundle.putDouble("trip", 0.0);
+        }
+        else
+        {
+            bundle.putDouble("gas_mileage", Double.parseDouble(gas_mileage.getText().toString()));
+            bundle.putDouble("gas_price", Double.parseDouble(price_of_gas.getText().toString()));
+            bundle.putDouble("trip", Double.parseDouble(length_of_trip.getText().toString()));
+        }
         return bundle;
     }
 }
