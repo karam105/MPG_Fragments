@@ -67,34 +67,13 @@ public class MainActivity extends AppCompatActivity
     {
         if(count == 1)
         {
-            gas_mileage = (EditText) findViewById(R.id.gas_mileage);
-            price_of_gas = (EditText) findViewById(R.id.gas_price);
-            length_of_trip = (EditText) findViewById(R.id.trip_length);
-
-            mile_cost = (TextView) findViewById(R.id.TV_mile_cost);
-            total = (TextView) findViewById(R.id.TV_total);
-
-            double mileage = Double.parseDouble(gas_mileage.getText().toString());
-            double price = Double.parseDouble(price_of_gas.getText().toString());
-            double length = Double.parseDouble(length_of_trip.getText().toString());
-
-            double cost_per_mile = price / mileage;
-            double total_cost = cost_per_mile * length;
-
-            Bundle sendData = new Bundle();
-            sendData.putDouble("cost", cost_per_mile);
-            sendData.putDouble("total", total_cost);
-            mpg_fragment.setArguments(sendData);
-
+            Bundle getData = mpg_fragment.getInfo();
+            if(getData == null)
+            {
+                Log.d("LOGTAG", "EMPTY");
+            }
+            results_fragment.setArguments(getData);
             showFragment(results_fragment);
-
-            bundle = mpg_fragment.getArguments();
-            Log.d("LOGTAG", "args: " + bundle);
-            String finalCost = Double.toString(bundle.getDouble("cost", 0));
-            String finalTotalCost = Double.toString(bundle.getDouble("total", 1));
-//            mile_cost.setText("30");
-//            total.setText(finalTotalCost);
-
         }
         else if (count == 0)
         {

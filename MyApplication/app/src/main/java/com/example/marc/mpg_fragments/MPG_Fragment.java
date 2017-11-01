@@ -34,6 +34,20 @@ public class MPG_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.mpg_fragment, container, false);
 
+        gas_mileage = (EditText) v.findViewById(R.id.gas_mileage);
+        price_of_gas = (EditText) v.findViewById(R.id.gas_price);
+        length_of_trip = (EditText) v.findViewById(R.id.trip_length);
+
         return v;
+    }
+
+    public Bundle getInfo()
+    {
+        Bundle bundle = new Bundle();
+        bundle.putDouble("gas_mileage", Double.parseDouble(gas_mileage.getText().toString()));
+        bundle.putDouble("gas_price", Double.parseDouble(price_of_gas.getText().toString()));
+        bundle.putDouble("trip", Double.parseDouble(length_of_trip.getText().toString()));
+
+        return bundle;
     }
 }
