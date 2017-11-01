@@ -1,6 +1,7 @@
 package com.example.marc.mpg_fragments;
 
 import android.content.Intent;
+import android.renderscript.Double2;
 import android.support.transition.Fade;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity
     public TextView mile_cost;
     public TextView total;
     public CheckBox ecoMode;
+
+    public Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,6 +71,9 @@ public class MainActivity extends AppCompatActivity
             price_of_gas = (EditText) findViewById(R.id.gas_price);
             length_of_trip = (EditText) findViewById(R.id.trip_length);
 
+            mile_cost = (TextView) findViewById(R.id.TV_mile_cost);
+            total = (TextView) findViewById(R.id.TV_total);
+
             double mileage = Double.parseDouble(gas_mileage.getText().toString());
             double price = Double.parseDouble(price_of_gas.getText().toString());
             double length = Double.parseDouble(length_of_trip.getText().toString());
@@ -82,11 +88,13 @@ public class MainActivity extends AppCompatActivity
 
             showFragment(results_fragment);
 
-            mile_cost = (TextView) findViewById(R.id.mile_cost);
-            total = (TextView) findViewById(R.id.total);
-
-            Bundle bundle = mpg_fragment.getArguments();
+            bundle = mpg_fragment.getArguments();
             Log.d("LOGTAG", "args: " + bundle);
+            String finalCost = Double.toString(bundle.getDouble("cost", 0));
+            String finalTotalCost = Double.toString(bundle.getDouble("total", 1));
+//            mile_cost.setText("30");
+//            total.setText(finalTotalCost);
+
         }
         else if (count == 0)
         {

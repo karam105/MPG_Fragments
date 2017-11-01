@@ -21,8 +21,8 @@ import com.example.marc.mpg_fragments.mpg_model;
 
 public class Results_Fragment extends Fragment
 {
-    public TextView cost_per_mile;
-    public TextView total_cost;
+    public TextView mile_cost;
+    public TextView total;
     public CheckBox ecoMode;
 
     private mpg_model MPG;
